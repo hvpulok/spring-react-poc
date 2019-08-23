@@ -1,4 +1,4 @@
-package com.muminlife.cardatabase.entity;
+package com.muminlife.cardatabase.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
