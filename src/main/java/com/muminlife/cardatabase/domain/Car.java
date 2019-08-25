@@ -33,6 +33,14 @@ public class Car {
 		this.owner = owner;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getBrand() {
 		return brand;
 	}
