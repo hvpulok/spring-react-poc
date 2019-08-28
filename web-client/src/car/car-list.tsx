@@ -29,6 +29,13 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
             });
     }
 
+    onDelClick(selectedCarDeleteUrl: string) {
+        console.log('onDelClick: deleting', selectedCarDeleteUrl);
+        axios.delete(`${selectedCarDeleteUrl}`)
+            .then(() => this.updateCarList())
+            .catch((error) => console.log(error));
+    }
+
     componentDidMount() {
         this.updateCarList();
     }
@@ -59,6 +66,10 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
                 Header: 'Price',
                 accessor: 'price'
             },
+            {
+                accessor: '_links.self.href',
+                Cell: (props: any) => (<button onClick={() => { this.onDelClick(props.value) }}>Delete</button>)
+            }
         ]
 
         return <ReactTable data={this.state.carList} columns={columns} filterable={true} />
