@@ -31,7 +31,12 @@ export default function EditCar(props: EditCarProps) {
         setCarInfoState(value);
         console.log('After edit car: ', value);
         if (!isCanceled) {
-            axios.put(props.carToEdit._links.self.href, value)
+            const token = sessionStorage.getItem("jwt");
+            axios.put(props.carToEdit._links.self.href, value, {
+                headers: {
+                    Authorization: token
+                }
+            })
                 .then(() => {
                     setCarInfoState(carToEditValue);
                     props.onRefresh();

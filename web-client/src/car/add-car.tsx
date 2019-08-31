@@ -24,7 +24,12 @@ export default function AddCar(props: AddCarProps) {
         setCarInfoState(value);
         console.log(value);
         if (!isCanceled) {
-            axios.post(`${SERVER_URL}/api/cars`, value)
+            const token = sessionStorage.getItem("jwt");
+            axios.post(`${SERVER_URL}/api/cars`, value, {
+                headers: {
+                    Authorization: token
+                }
+            })
                 .then(() => {
                     setCarInfoState(EmptyCar);
                     props.onRefresh();

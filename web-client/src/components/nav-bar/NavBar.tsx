@@ -3,11 +3,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountBox from '@material-ui/icons/AccountBox';
 import AddCar from '../../car/add-car';
+import Login from '../login/login';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,7 +41,7 @@ export default function NavBar(props: NavBarProps) {
             Car Database
           </Typography>
           <AddCar onRefresh={props.onRefresh} />
-          <Button color="inherit"><AccountBox />Login</Button>
+          <Login onRefresh={props.onRefresh} />
         </Toolbar>
       </AppBar>
     </div>

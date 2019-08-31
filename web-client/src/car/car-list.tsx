@@ -12,17 +12,23 @@ export interface IAppProps {
 }
 
 export interface IAppStates {
-    carList: CarDTO[]
+    carList: CarDTO[],
+    isLoggedIn: boolean
 }
 
 export default class CarList extends React.Component<IAppProps, IAppStates> {
     constructor(props: IAppProps) {
         super(props);
-        this.state = { carList: [] }
+        this.state = { carList: [], isLoggedIn: false }
     }
 
     updateCarList() {
-        axios.get(`${SERVER_URL}/api/cars`)
+        const token = sessionStorage.getItem("jwt");
+        axios.get(`${SERVER_URL}/api/cars`, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(({ data }) => {
                 console.log(data._embedded);
                 this.setState({ carList: data._embedded.cars })
@@ -32,16 +38,14 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
             });
     }
 
-    onEditClick(selectedCar: CarDTO) {
-        console.log('onEditClick: opening edit dialog', selectedCar);
-        // axios.delete(`${selectedCarUrl}`)
-        //     .then(() => this.updateCarList())
-        //     .catch((error) => console.log(error));
-    }
-
     onDelClick(selectedCarDeleteUrl: string) {
         console.log('onDelClick: deleting', selectedCarDeleteUrl);
-        axios.delete(`${selectedCarDeleteUrl}`)
+        const token = sessionStorage.getItem("jwt");
+        axios.delete(`${selectedCarDeleteUrl}`, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(() => this.updateCarList())
             .catch((error) => console.log(error));
     }
