@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'react-table/react-table.css';
 import { CarDTO } from './car-list.model';
 import { SERVER_URL } from '../configs/app.const';
+import NavBar from '../components/nav-bar/NavBar';
 
 export interface IAppProps {
 }
@@ -72,6 +73,11 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
             }
         ]
 
-        return <ReactTable data={this.state.carList} columns={columns} filterable={true} />
+        return (
+            <>
+                <NavBar onRefresh={() => this.updateCarList()} />
+                <ReactTable data={this.state.carList} columns={columns} filterable={true} />
+            </>
+        )
     }
 }

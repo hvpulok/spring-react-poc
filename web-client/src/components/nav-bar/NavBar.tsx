@@ -23,7 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NavBar() {
+export interface NavBarProps {
+  onRefresh: () => void;
+}
+
+
+export default function NavBar(props: NavBarProps) {
   const classes = useStyles();
 
   return (
@@ -36,7 +41,7 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             Car Database
           </Typography>
-          <AddCar />
+          <AddCar onRefresh={props.onRefresh} />
           <Button color="inherit"><AccountBox />Login</Button>
         </Toolbar>
       </AppBar>

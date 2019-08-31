@@ -28,6 +28,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+const emptyCar = {
+    brand: '',
+    model: '',
+    color: '',
+    registerNumber: '',
+    year: '',
+    price: ''
+};
+
 export interface AddCarFormDialogProps {
     open: boolean;
     currentCarInfo: Car;
@@ -44,6 +53,7 @@ function AddCarFormDialog(props: AddCarFormDialogProps) {
     };
 
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setCarInfoState(emptyCar)
         onClose(carInfoState);
         event.preventDefault();
     }
@@ -110,16 +120,14 @@ function AddCarFormDialog(props: AddCarFormDialogProps) {
     );
 }
 
-export default function AddCar() {
+export interface AddCarProps {
+    onRefresh: () => void;
+}
+
+export default function AddCar(props: AddCarProps) {
     const [open, setOpen] = React.useState<boolean>(false);
-    const [carInfoState, setCarInfoState] = React.useState<Car>({
-        brand: '',
-        model: '',
-        color: '',
-        registerNumber: '',
-        year: '',
-        price: ''
-    });
+
+    const [carInfoState, setCarInfoState] = React.useState<Car>(emptyCar);
 
     function handleClickOpen() {
         setOpen(true);
@@ -131,8 +139,9 @@ export default function AddCar() {
         console.log(value);
         if (!isCanceled) {
             axios.post(`${SERVER_URL}/api/cars`, value)
-                .then(({ data }) => {
-                    console.log(data._embedded);
+                .then(() => {
+                    setCarInfoState(emptyCar);
+                    props.onRefresh();
                 })
                 .catch((error) => {
                     console.log(error);
