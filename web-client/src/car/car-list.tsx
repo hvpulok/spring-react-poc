@@ -5,6 +5,7 @@ import 'react-table/react-table.css';
 import { CarDTO } from './car-list.model';
 import { SERVER_URL } from '../configs/app.const';
 import NavBar from '../components/nav-bar/NavBar';
+import { Button } from '@material-ui/core';
 
 export interface IAppProps {
 }
@@ -28,6 +29,13 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    onEditClick(selectedCar: CarDTO) {
+        console.log('onEditClick: opening edit dialog', selectedCar);
+        // axios.delete(`${selectedCarUrl}`)
+        //     .then(() => this.updateCarList())
+        //     .catch((error) => console.log(error));
     }
 
     onDelClick(selectedCarDeleteUrl: string) {
@@ -69,7 +77,14 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
             },
             {
                 accessor: '_links.self.href',
-                Cell: (props: any) => (<button onClick={() => { this.onDelClick(props.value) }}>Delete</button>)
+                filterable: false,
+                sortable: false,
+                Cell: (props: any) => (
+                    <>
+                        <Button color="primary" onClick={() => { this.onEditClick(props.original) }}>Edit</Button>
+                        <Button color="secondary" onClick={() => { this.onDelClick(props.value) }}>Delete</Button>
+                    </>
+                )
             }
         ]
 
