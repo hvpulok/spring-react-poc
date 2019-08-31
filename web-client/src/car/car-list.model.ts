@@ -3,8 +3,11 @@ export default interface Car {
     model: string;
     color: string;
     registerNumber: string;
-    year: number;
-    price: number;
+    year: number | string;
+    price: number | string;
+}
+
+export interface CarDTO extends Car {
     _links: {
         self: {
             href: string;

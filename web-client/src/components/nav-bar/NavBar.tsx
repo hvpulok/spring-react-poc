@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountBox from '@material-ui/icons/AccountBox';
-import AddCarDialog from '../../car/add-car';
+import AddCar from '../../car/add-car';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +36,7 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             Car Database
           </Typography>
-          <AddCarDialog />
+          <AddCar />
           <Button color="inherit"><AccountBox />Login</Button>
         </Toolbar>
       </AppBar>

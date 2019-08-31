@@ -2,14 +2,14 @@ import * as React from 'react';
 import ReactTable from 'react-table';
 import axios from 'axios';
 import 'react-table/react-table.css';
-import Car from './car-list.model';
+import { CarDTO } from './car-list.model';
 import { SERVER_URL } from '../configs/app.const';
 
 export interface IAppProps {
 }
 
 export interface IAppStates {
-    carList: Car[]
+    carList: CarDTO[]
 }
 
 export default class CarList extends React.Component<IAppProps, IAppStates> {
