@@ -17,3 +17,12 @@ export interface CarDTO extends Car {
         }
     }
 }
+
+export const EmptyCar = {
+    brand: '',
+    model: '',
+    color: '',
+    registerNumber: '',
+    year: '',
+    price: ''
+};
