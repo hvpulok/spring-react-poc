@@ -3,7 +3,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import AddIcon from '@material-ui/icons/Add';
 import { TextField } from '@material-ui/core';
 import Car, { EmptyCar } from './car-list.model';
 
@@ -29,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface CarFormDialogProps {
     open: boolean;
     currentCarInfo: Car;
+    submitButtonText: string;
     onClose: (value: Car, isCanceled?: boolean) => void;
 }
 
@@ -103,7 +103,7 @@ export default function CarFormDialog(props: CarFormDialogProps) {
                     onChange={handleChange('year')}
                     margin="normal"
                 />
-                <Button className={classes.button} type="submit" color="primary" variant="contained" onClick={handleSubmit}><AddIcon /> Add Car</Button>
+                <Button className={classes.button} type="submit" color="primary" variant="contained" onClick={handleSubmit}>{props.submitButtonText}</Button>
             </form>
         </Dialog>
     );

@@ -6,6 +6,7 @@ import { CarDTO } from './car-list.model';
 import { SERVER_URL } from '../configs/app.const';
 import NavBar from '../components/nav-bar/NavBar';
 import { Button } from '@material-ui/core';
+import EditCar from './edit-car';
 
 export interface IAppProps {
 }
@@ -81,7 +82,7 @@ export default class CarList extends React.Component<IAppProps, IAppStates> {
                 sortable: false,
                 Cell: (props: any) => (
                     <>
-                        <Button color="primary" onClick={() => { this.onEditClick(props.original) }}>Edit</Button>
+                        <EditCar onRefresh={() => this.updateCarList()} carToEdit={props.original} />
                         <Button color="secondary" onClick={() => { this.onDelClick(props.value) }}>Delete</Button>
                     </>
                 )

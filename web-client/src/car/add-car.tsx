@@ -38,7 +38,7 @@ export default function AddCar(props: AddCarProps) {
     return (
         <>
             <Button color="inherit" onClick={handleClickOpen}><AddIcon /> Add Car</Button>
-            <CarFormDialog currentCarInfo={carInfoState} open={open} onClose={handleClose} />
+            <CarFormDialog currentCarInfo={carInfoState} submitButtonText="Add Car" open={open} onClose={handleClose} />
         </>
     );
 }
